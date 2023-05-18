@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Noto Serif", serif;
+        font-family: "Oswald", sans-serif;
+        font-family: "Roboto Mono", monospace;
+        font-size: 19px;
+        font-weight: 700;
+        color: white;
+      }
+      body {
+        background-image: url(https://a-static.besthdwallpaper.com/don-t-waste-time-wallpaper-3000x2000-84842_42.jpg);
+        background-repeat: no-repeat;
+        background-size: cover;
+      }
+      .writtingZone {
+        width: 300px;
+        height: 50px;
+        border-radius: 9px;
+        border: none;
+        margin-left: 33vw;
+        margin-top: 7vh;
+        background-color: rgba(63, 62, 62, 0.603);
+        padding: 2vh;
+      }
+      button {
+        margin-left: 2vw;
+        height: 50px;
+        width: 70px;
+        border-radius: 9px;
+        background-color: rgba(63, 62, 62, 0.603);
+        border: none;
+      }
+      button:hover {
+        background-color: rgba(63, 62, 62);
+      }
+      .deleteButton{
+        position: absolute;
+        right: 20vw;
+      }
+      li {
+        margin-left: 30vw;
+        margin-top: 3vh;
+      }
+      .checker {
+        height: 30px;
+        width: 30px;
+        position: absolute;
+        right: 31vw;
+      }
+    </style>
+  </head>
+  <body>
+    <input
+      class="writtingZone"
+      id="writtingZone"
+      type="text"
+      placeholder="What's today's tasks"
+    />
+    <button class="addButton" onclick="add() ">Add</button>
+    <ul class="todolists"></ul>
+  </body>
+  <script>
+    let tasks = [];
+    let ul = document.getElementsByClassName("todolists");
+    // let C = document.createElement("input",readonly)
+    let text = document.getElementById("writtingZone");
+    function add() {
+      if (text.value !== "") {
+        tasks.push(text.value);
+      } else {
+        alert("Fill the tasks zone first");
+      }
+      displaytasks();
+    }
+    function displaytasks() {
+      tasks.forEach((todo) => {
+        let listTasks = document.createElement("li");
+        listTasks.innerText = todo;
+        tasks.length = 0;
+        let Checkbox = document.createElement("input");
+        Checkbox.setAttribute("type", "checkbox");
+        Checkbox.setAttribute("class", "checker");
+        let del = document.createElement("button");
+        del.setAttribute("class","deleteButton")
+        del.innerText = "Delete";
+        listTasks.append(Checkbox,del);
+        ul[0].append(listTasks);
+        Checkbox.onchange = () => {
+            if (Checkbox.checked == true)
+            listTasks.style.textDecoration = "line-through";
+            else
+            listTasks.style.textDecoration = "none";
+        };
+        del.addEventListener( "click",function() {listTasks.remove()}
+    
+        )
+    });
+       
+    }
+  </script>
+</html>
